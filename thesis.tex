@@ -1,0 +1,111 @@
+% ------------------------------------------------
+%     Preamble
+% ------------------------------------------------
+\usepackage{luatexja} % LuaTeX with Japanese
+\usepackage{ifplatform} % Check your OS, Windows, MacOS, Linux, and Cygwin.
+% In WSL, it detects your OS as Linux.
+% Compile your tex file with option '-shell-escape' is required.
+
+% Font
+\usepackage[no-math]{fontspec}
+\ifwindows% For Windows User
+  \newcommand{\SetJapaneseFont}{yu-win10}
+\fi
+\ifmacosx% For MacOS User
+  \newcommand{\SetJapaneseFont}{hiragino-pro}
+\fi
+\iflinux%
+  \newcommand{\SetJapaneseFont}{haranoaji}
+\fi
+\usepackage[\SetJapaneseFont,no-math]{luatexja-preset}
+
+% ----- Mathematics -----------------
+\usepackage{amsmath,amsfonts}
+\usepackage{bm} % Bold font in Math mode
+\usepackage{chngcntr} % counter with section number
+\counterwithin{equation}{section}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+
+% Physics and Chemistry
+\usepackage{siunitx} % SI unit
+\DeclareSIUnit{\barn}{\textrm{b}} % barn is deprecated in siunitx pacakge.
+\usepackage{physics}
+\usepackage[version=4]{mhchem}
+
+% Graphic
+\usepackage{graphicx} % required for using graphic
+\usepackage{float} % use [H] option in figure environment.
+\usepackage{subcaption} % small caption in main figure
+\captionsetup[subfigure]{labelformat=simple}
+\renewcommand{\thesubfigure}{(\alph{subfigure})} % refer to subcaption with parentheses.
+
+% Adjusting spaces (With showframe option to show range of space)
+\usepackage[top=20truemm, bottom=25truemm, left=25truemm, right=15truemm]{geometry}
+
+% Reference
+% Reference with BibLaTeX, Check: https://qiita.com/shiro_takeda/items/fac1351495f32c224a28
+% \usepackage[backend=biber, style=numeric-comp]{biblatex}
+\usepackage[backend=biber, style=numeric-comp]{biblatex-japanese} % For BibLaTeX with Japanese documents
+\ExecuteBibliographyOptions{
+  sorting=none,sortcites=true,
+  abbreviate=true,date=year,
+  isbn=false,url=false,
+  doi=false,backref=true,
+  maxnames=2,minnames=1
+}
+% \DeclareNameAlias{author}{given-family} % author name output GivenName FamilyName.
+\addbibresource{ref_master.bib} % Your bibliography
+\usepackage[setpagesize=false]{hyperref}
+\usepackage{tabularx} % usual table for
+\usepackage{multirow} % merge row
+\usepackage{url}
+\usepackage{xcolor} % Set color for hyperref package
+\hypersetup{hidelinks, luatex}
+
+\usepackage{cleveref}
+% For cleveref package
+\crefname{equation}{式}{式} % {環境名}{単数形}{複数形} \crefで引くときの表示
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{algorithm}{Algorithm}{Algorithm}
+\crefname{section}{第}{第}
+\creflabelformat{section}{#2#1節#3}
+\crefname{subsection}{第}{第}
+\creflabelformat{subsection}{#2#1小節#3}
+\crefname{appendix}{付録}{付録}
+\newcommand{\crefpairconjunction}{と} % A and B
+\newcommand{\crefrangeconjunction}{から} % From A to B
+\newcommand{\crefmiddleconjunction}{，} % A, B, and C
+\newcommand{\creflastconjunction}{，および}
+
+% Multi-line comment out, use comment environment.
+\usepackage{comment}
+
+% Insert space between Chapter and title
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{2\Cvs}% English 50pt
+  {\parindent\z@\raggedright\normalfont%
+    \ifnum\c@secnumdepth>\m@ne%
+      \huge\headfont\@chapapp\thechapter\@chappos\quad%
+      %% \par\nobreak
+      %% \vskip \Cvs % English 20pt
+    \fi
+    \interlinepenalty\@M%
+    \Huge \headfont{} #1\par\nobreak%
+    \vskip 3\Cvs}} % English 40pt
+\makeatother
+
+%----------- Original Command -------------------->
+% Create new command: \newcommand
+% Change the command: \renewcommand
+\newcommand{\ThesisTitle}{論文のタイトル}
+\newcommand{\ThesisTitleEnglish}{Thesis Title for English}
+\newcommand{\ThesisType}{修士論文}
+\newcommand{\ThesisYear}{2023}
+\newcommand{\ThesisAuthor}{著者\quad{名}}
+
+\newcommand{\Nuclide}[2]{$^{#1}#2$} % Put Nuclide such Fl-298(\Nuclide{298}{114}) for New superheavy element
+
+% Technical Term
