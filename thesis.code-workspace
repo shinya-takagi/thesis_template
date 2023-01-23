@@ -4,5 +4,8 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"editor.defaultFormatter": "James-Yu.latex-workshop",
+		"editor.formatOnSave": true
+	}
 }
