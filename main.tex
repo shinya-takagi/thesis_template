@@ -1,0 +1,18 @@
+\documentclass[report,paper=a4,fontsize=11bp]{jlreq}
+
+% Separate compile package.
+\usepackage{subfiles}
+% Read Preamble (without a extension)
+\input{thesis}
+
+\begin{document}
+
+\title{\ThesisTitle}
+\author{\ThesisAuthor}
+\data{\today}
+\maketitle
+\tableofcontents
+
+\subfile{src/01_introduction}
+
+\end{document}
